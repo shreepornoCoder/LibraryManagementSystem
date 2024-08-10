@@ -10,5 +10,7 @@ def Home(request, category_slug=None):
         category = get_object_or_404(BookCategoryModel, slug = category_slug)
         data = Book.objects.filter(book_category = category)
 
+    print(categories)
+    print(data)
     return render(request, 'home.html', {"data":data, "category":categories})
 
