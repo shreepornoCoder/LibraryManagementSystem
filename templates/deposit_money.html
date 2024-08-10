@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="text-white" style="text-decoration: underline; text-transform: capitalize; text-align: center; margin-top: 35px; margin-bottom: 50px;">Deposite Money</h1>
+
+<form method="post" style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px; margin: auto;display: flex; flex-direction: column; gap: 20px;
+">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" style="background-color: #007bff; color: #ffffff; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background-color 0.3s ease;text-transform: uppercase;">
+        Deposit
+    </button>
+</form>
+
+{% endblock %}

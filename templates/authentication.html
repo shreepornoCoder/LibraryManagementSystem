@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div style="width: 1000px; background-color: white; margin: auto; border-radius: 20px; 
+    {% if type == 'SignUp' %} height: 680px; {% endif %} 
+    {% if type == 'Login' %} height: 340px; {% endif %}">
+
+    <h1 class="text-primary" style="text-align: center; color: white; margin-bottom: 10px; margin-top: 50px; padding-top: 20px; text-decoration: underline;">{{type}} Here</h1>
+    <div style="width: 60%; margin: auto; margin-top: 20px; margin-bottom: 40px;" class='form-container'>
+        <form method = "post">
+            {% csrf_token %}
+            <!-- {{form | crispy }} -->
+            {% for fm in form %}
+                <div style="margin-bottom: 20px;" class="form-group">
+                    {{ fm.label_tag }} {{ fm }} {{ fm.errors | striptags }}
+                </div>
+            {% endfor %} 
+            <button type="submit" class="btn btn-primary mb-3 ">Submit</button>
+        </form>
+        {% if type == 'SignUp' %}
+            <h6>Already have an account? <a style="text-decoration: none;" href="{% url 'login' %}">Login</a></h6>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock  %}

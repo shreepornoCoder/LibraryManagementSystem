@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-white" style="text-decoration: underline; text-transform: capitalize; text-align: center; margin-top: 35px; ">Profile page</h2>
+
+
+<div class="d-flex mb-5" style="justify-content:center; margin-top: 50px;">
+    <button style="padding: 18px; width: 300px; border-radius: 13px; background-color: crimson; border: none;" class="mx-3">
+        <a class="fw-bold fs-5 text-white" style="text-decoration: none;" href="{% url "profile_update" %}">Update Your Account</a>
+    </button>
+
+    <button style="padding: 18px; width: 300px; border-radius: 13px; background-color: rgb(170, 0, 255); border: none;" class="mx-3">
+        <a class="fw-bold fs-5 text-white" style="text-decoration: none;" href="{% url "deposit_money" %}">Deposit Money</a>
+    </button>
+</div>
+
+
+<h1 class="text-center mt-5 text-white" style="text-decoration: underline;">Book Borrow History</h1>
+
+<h3 class="text-center mt-3">Total Borrowed Books : {{ books|length }}</h3>
+<div class="mt-5" style="width: 1500px; margin:auto">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Book Title</th>
+                <th scope="col">Book Price</th>
+                <th scope="col">Book Rating</th>
+                <th scope="col">Borrowing Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in books %}
+                <tr>
+                    <td>{{ b.book.title }}</td>
+                    <td>{{ b.book.price }} $</td>
+                    <td>{{ b.book.ratings }}  <i class="fa-solid fa-star text-warning"></i></td>
+                    <td>{{ b.borrowing_date }}</td>
+                    <td>
+                        {% if b.is_returned %}
+                            <h6 class="text-success">Returned</h6>
+                        {% else %}
+                            <form action="{% url 'book_return' b.id %}" method="post">
+                                {% csrf_token %}
+                                <button style="border: none; border-radius: 10px; padding: 10px;" class="bg-danger text-white fw-bold" type="submit">Return</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    label{
+        color: rgb(255, 162, 0);
+        margin-bottom: 5px;
+    }
+</style>
+
+
+<div style="width: 1000px; background-color: white; margin: auto; border-radius: 20px;">
+
+    <h1 class="text-warning" style="text-align: center; color: white; margin-bottom: 10px; margin-top: 50px; padding-top: 20px; text-decoration: underline;">Add Book Here</h1>
+
+    <div style="width: 60%; margin: auto; margin-top: 20px; margin-bottom: 40px;" class='form-container'>
+
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- {{form | crispy }} -->
+            {% for fm in form %}
+                <div style="margin-bottom: 20px;" class="form-group">
+                    {{ fm.label_tag }} {{ fm }} {{ fm.errors | striptags }}
+                </div>
+            {% endfor %} 
+            <button type="submit" class="btn btn-primary mb-3 ">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock  %}

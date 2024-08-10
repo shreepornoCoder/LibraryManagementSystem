@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex" style="justify-content: space-around; margin-top: 50px;">
+    <div class="" style="margin-top: 35px; width: 800px; height: 370px; background-color: white; border-radius: 10px;">
+        <h2 class="text-primary text-center mt-3">Library Management System</h2>
+        <p style="width: 600px; margin: auto; padding-top: 10px; text-align: justify; font-weight: 500; line-height: 28px;">This is the a Library Management Website where you can borrow books, see book details, and review that book. Also it will send you emails after creating accout, changing profile and borrowing books. It is a very good website, That's why you should check it out! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis et voluptas labore dolores ab quos praesentium illum dolore nam sequi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aliquid placeat vero earum ex illum. Numquam eaque temporibus debitis aliquid consectetur commodi impedit molestiae sapiente. <br>
+
+        Don't have any account? Create your account and Explore</p>
+        <a class="btn btn-danger fw-bold" style="position: relative; left: 540px;
+        top: -30px;" href="{% url 'signup' %}">SignUp</a>
+    </div>
+    <img src="{% static 'D:\Phitron\SDT\Django\LibraryManagementSystem\static\lib0.png' %}" style="width: 700px; border-radius: 15px;">
+</div>
+
+<h3 class="text-center mt-5">Explore Books Here:</h3>
+
+<div>
+    <h2 class="text-light mb-4" style="text-align: center; margin-top: 40px;">Categories</h2>
+    <div style="display: flex; text-decoration: none; justify-content: space-evenly;
+    font-size: 20px; width: 1600px; height: 70px; border: solid 3px rgba(4, 180, 71, 0.994); margin: auto; background-color: white; border-radius: 15px;">
+        {% for cat in category %}
+            <div class="form-check" style="padding-top: 15px;">
+                <input class="form-check-input" type="radio" name="category" id="{{ cat.id }}">
+                <label class="form-check-label mb-2" for="{{ cat.id }}">
+                    <a href="{% url 'category_wise_post' cat.slug %}" class="text-decoration-none fw-bold" style="color: greenyellow;">{{ cat.category }}</a>
+                </label>
+            </div>
+        {% endfor %} 
+    </div>
+</div>
+
+<div>
+    <h1 class="text-center" style=" padding-top: 50px;">Total Book Found: {{data | length}}</h1>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; padding-top: 20px; padding-bottom: 30px; padding-top: 20px;">
+        {% for post in data %}
+        <div class="card" style="width: 20rem; padding-bottom: 30px; margin-bottom: 30px; margin-top: 20px; border-radius: 15px;">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" style="height: 300px; width: 318px;" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title text-primary fw-bold"><span style="text-decoration: underline;">Book Title</span>: {{post.title}}</h5>
+              <h6 class="card-title text-success  fw-bold"><span style="text-decoration: underline;">Book Category</span>: {{post.book_category}}</h6>
+              <h5 class="card-text text-danger fw-bold"><span style="text-decoration: underline;">Book Price</span>:   {{post.price}}$</h5>
+              <br>
+              <a href="{% url 'book_detail' post.book_id %}" class="btn btn-primary details"> View Book Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock  %}
