@@ -6,15 +6,13 @@ django-autoslug-field
 django-environ
 django-email
 psycopg2
+psycopg2-binary
 mysql-connector-python
 sqlparse
 certifi
 requests
 lxml
 pillow
-debugpy
-ipython
-pytz
-tzdata
 beautifulsoup4
 bs4
+dj-database-url
