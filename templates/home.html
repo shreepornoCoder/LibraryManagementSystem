@@ -8,8 +8,13 @@
         <p style="width: 600px; margin: auto; padding-top: 10px; text-align: justify; font-weight: 500; line-height: 28px;">This is the a Library Management Website where you can borrow books, see book details, and review that book. Also it will send you emails after creating accout, changing profile and borrowing books. It is a very good website, That's why you should check it out! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis et voluptas labore dolores ab quos praesentium illum dolore nam sequi! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione aliquid placeat vero earum ex illum. Numquam eaque temporibus debitis aliquid consectetur commodi impedit molestiae sapiente. <br>
 
         Don't have any account? Create your account and Explore</p>
-        <a class="btn btn-danger fw-bold" style="position: relative; left: 540px;
-        top: -30px;" href="{% url 'signup' %}">SignUp</a>
+        {% if user.is_authenticated %}
+            <a class="btn btn-danger fw-bold" style="position: relative; left: 540px;
+            top: -30px;" href="{% url 'signup' %}">SignUp</a>
+        {% else %}
+            <a class="btn btn-danger fw-bold" style="position: relative; left: 540px;
+            top: -30px;" href="{% url 'profile' %}">SignUp</a>
+        {% endif %}
     </div>
     <img src="{% static 'D:\Phitron\SDT\Django\LibraryManagementSystem\static\lib0.png' %}" style="width: 700px; border-radius: 15px;">
 </div>
